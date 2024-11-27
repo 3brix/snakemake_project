@@ -15,4 +15,5 @@ outputs:
   pca: "results/pbmc_pca.rds"
   umap: "results/pbmc_umap.rds"
   cluster_markers: "results/cluster_markers.rds"
-  umap_plot: "results/pbmc3k_umap.jpg"
+  umap_plot: "results/pbmc3k_umap.png"
+  umap_plot_id: "results/pbmc3k_umap_id.png"
