@@ -2,14 +2,14 @@ configfile: "config.yaml"
 
 rule all:
     input:
-        config["outputs"]["umap_plot"].format(output_dir=config["output_dir"]),
-        config["outputs"]["cluster_markers"].format(output_dir=config["output_dir"])
+        config["outputs"]["umap_plot"],
+        config["outputs"]["cluster_markers"]
 
 rule setup_and_initialization:
     input:
         data_dir=config["data_dir"]
     output:
-        config["outputs"]["initial"].format(output_dir=config["output_dir"])
+        config["outputs"]["initial"]
     params:
         script=config["scripts"]["setup"]
     shell:
@@ -19,9 +19,9 @@ rule setup_and_initialization:
 
 rule qc_and_preprocessing:
     input:
-        config["outputs"]["initial"].format(output_dir=config["output_dir"])
+        config["outputs"]["initial"]
     output:
-        config["outputs"]["preprocessed"].format(output_dir=config["output_dir"])
+        config["outputs"]["preprocessed"]
     params:
         script=config["scripts"]["qc"]
     shell:
@@ -31,9 +31,9 @@ rule qc_and_preprocessing:
 
 rule normalization_and_feature_selection:
     input:
-        config["outputs"]["preprocessed"].format(output_dir=config["output_dir"])
+        config["outputs"]["preprocessed"]
     output:
-        config["outputs"]["normalized"].format(output_dir=config["output_dir"])
+        config["outputs"]["normalized"]
     params:
         script=config["scripts"]["normalization"]
     shell:
@@ -43,9 +43,9 @@ rule normalization_and_feature_selection:
 
 rule scaling_and_pca:
     input:
-        config["outputs"]["normalized"].format(output_dir=config["output_dir"])
+        config["outputs"]["normalized"]
     output:
-        config["outputs"]["pca"].format(output_dir=config["output_dir"])
+        config["outputs"]["pca"]
     params:
         script=config["scripts"]["scaling"]
     shell:
@@ -55,9 +55,9 @@ rule scaling_and_pca:
 
 rule clustering_and_umap:
     input:
-        config["outputs"]["pca"].format(output_dir=config["output_dir"])
+        config["outputs"]["pca"]
     output:
-        config["outputs"]["umap"].format(output_dir=config["output_dir"])
+        config["outputs"]["umap"]
     params:
         script=config["scripts"]["clustering"]
     shell:
@@ -67,10 +67,10 @@ rule clustering_and_umap:
 
 rule differential_markers_and_visualization:
     input:
-        config["outputs"]["umap"].format(output_dir=config["output_dir"])
+        config["outputs"]["umap"]
     output:
-        markers=config["outputs"]["cluster_markers"].format(output_dir=config["output_dir"]),
-        plot=config["outputs"]["umap_plot"].format(output_dir=config["output_dir"])
+        markers=config["outputs"]["cluster_markers"],
+        plot=config["outputs"]["umap_plot"]
     params:
         script=config["scripts"]["markers"]
     shell:
