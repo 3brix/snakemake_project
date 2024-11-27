@@ -6,7 +6,7 @@ rule all:
         config["outputs"]["feature_scatter_plot"],
         config["outputs"]["variable_features_plot"],
         config["outputs"]["elbow_plot"],
-        config["outputs"]["umap_dimplot"]
+        config["outputs"]["umap_dimplot_id"]
 
 rule setup_and_initialization:
     input:
