@@ -1,0 +1,43 @@
+data_dir: "data/filtered_gene_bc_matrices/hg19"
+
+scripts:
+  setup: "scripts/setup_and_initialization.R"
+  qc_preprocessing: "scripts/qc_and_preprocessing.R"
+  qc_visualization: "scripts/qc_visualization.R"
+  normalization: "scripts/normalization_and_feature_selection.R"
+  variable_features_visualization: "scripts/variable_features_visualization.R"
+  scaling: "scripts/scaling_and_pca.R"
+  pca_visualization: "scripts/pca_visualization.R"
+  clustering: "scripts/clustering_and_umap.R"
+  markers: "scripts/differential_markers_and_visualization.R"
+
+outputs:
+  # Files
+  initial: "results/initial_processed_data.rds"
+  preprocessed: "results/preprocessed_data.rds"
+  normalized: "results/normalized_data.rds"
+  pca: "results/pca_data.rds"
+  umap: "results/umap_data.rds"
+  cluster_markers: "results/cluster_markers.rds" # only permanent one
+
+  # Plots
+  qc_violin_plot: "results/plots/qc_violin_plot.png"
+  feature_scatter_plot: "results/plots/feature_scatter_plot.png"
+  variable_features_plot: "results/plots/variable_features_plot.png"
+  pca_loadings: "results/plots/pca_loading_plot.png"
+  pca_dimplot: "results/plots/pca_dimplot.png"
+  pca_heatmap1: "results/plots/pca_heatmap1.png"
+  pca_heatmap15: "results/plots/pca_heatmap15.png"
+  elbow_plot: "results/plots/elbow_plot.png"
+  umap_dimplot: "results/plots/umap_dimplot.png"
+  marker_violin: "results/plots/marker_violin.png"
+  marker_violin_raw: "results/plots/marker_violin_raw.png"
+  marker_feature: "results/plots/marker_feature.png"
+  marker_heatmap: "results/plots/marker_heatmap.png"
+
+ 
+
+
+
+
+
