@@ -1,0 +1,123 @@
+data_dir = "data/filtered_gene_bc_matrices/hg19"
+
+rule all:
+    input:
+        "results/cluster_markers.rds",
+        "results/plots/feature_scatter_plot.png",
+        "results/plots/variable_features_plot.png",
+        "results/plots/elbow_plot.png",
+        "results/plots/umap_dimplot.png"
+
+rule setup_and_initialization:
+    input:
+        data_dir=data_dir
+    output:
+        temp("results/initial_processed_data.rds")
+    params:
+        script="scripts/setup_and_initialization.R"
+    shell:
+        """
+        Rscript {params.script} {input.data_dir} {output}
+        """
+
+rule qc_preprocessing:
+    input:
+        "results/initial_processed_data.rds"
+    output:
+        temp("results/preprocessed_data.rds")
+    params:
+        script="scripts/qc_and_preprocessing.R"
+    shell:
+        """
+        Rscript {params.script} {input} {output}
+        """
+
+rule qc_visualization:
+    input:
+        "results/preprocessed_data.rds"
+    output:
+        violin="results/plots/qc_violin_plot.png",
+        scatter="results/plots/feature_scatter_plot.png"
+    params:
+        script="scripts/qc_visualization.R"
+    shell:
+        """
+        Rscript {params.script} {input} {output.violin} {output.scatter}
+        """
+
+rule normalization_and_feature_selection:
+    input:
+        "results/preprocessed_data.rds"
+    output:
+        temp("results/normalized_data.rds")
+    params:
+        script="scripts/normalization_and_feature_selection.R"
+    shell:
+        """
+        Rscript {params.script} {input} {output}
+        """
+
+rule variable_features_visualization:
+    input:
+        "results/normalized_data.rds"
+    output:
+        "results/plots/variable_features_plot.png"
+    params:
+        script="scripts/variable_features_visualization.R"
+    shell:
+        """
+        Rscript {params.script} {input} {output}
+        """
+
+rule scaling_and_pca:
+    input:
+        "results/normalized_data.rds"
+    output:
+        temp("results/pca_data.rds")
+    params:
+        script="scripts/scaling_and_pca.R"
+    shell:
+        """
+        Rscript {params.script} {input} {output}
+        """
+
+rule pca_visualization:
+    input:
+        "results/pca_data.rds"
+    output:
+        pca_loadings="results/plots/pca_loading_plot.png",
+        pca_dimplot="results/plots/pca_dimplot.png",
+        pca_heatmap1="results/plots/pca_heatmap1.png",
+        pca_heatmap15="results/plots/pca_heatmap15.png",
+        elbow_plot="results/plots/elbow_plot.png"
+    params:
+        script="scripts/pca_visualization.R"
+    shell:
+        """
+        Rscript {params.script} {input} {output.pca_loadings} {output.pca_dimplot} {output.pca_heatmap1} {output.pca_heatmap15} {output.elbow_plot}
+        """
+
+rule clustering_and_umap:
+    input:
+        "results/pca_data.rds"
+    output:
+        temp("results/umap_data.rds")
+    params:
+        script="scripts/clustering_and_umap.R"
+    shell:
+        """
+        Rscript {params.script} {input} {output}
+        """
+
+rule differential_markers_and_visualization:
+    input:
+        "results/umap_data.rds"
+    output:
+        markers="results/cluster_markers.rds",
+        plot="results/plots/umap_dimplot.png"
+    params:
+        script="scripts/differential_markers_and_visualization.R"
+    shell:
+        """
+        Rscript {params.script} {input} {output.markers} {output.plot}
+        """
