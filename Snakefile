@@ -2,7 +2,7 @@ configfile: "config.yaml"
 
 rule all:
     input:
-        config["outputs"]["umap_plot"],
+        config["outputs"]["umap_plot_id"],
         config["outputs"]["cluster_markers"]
 
 rule setup_and_initialization:
