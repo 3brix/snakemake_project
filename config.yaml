@@ -1,5 +1,4 @@
 data_dir: "data/filtered_gene_bc_matrices/hg19"
-output_dir: "results"
 
 scripts:
   setup: "scripts/setup_and_initialization.R"
@@ -10,15 +9,10 @@ scripts:
   markers: "scripts/differential_markers_and_visualization.R"
 
 outputs:
-  initial: "{output_dir}/pbmc_initial.rds"
-  preprocessed: "{output_dir}/pbmc_preprocessed.rds"
-  normalized: "{output_dir}/pbmc_normalized.rds"
-  pca: "{output_dir}/pbmc_pca.rds"
-  umap: "{output_dir}/pbmc_umap.rds"
-  cluster_markers: "{output_dir}/cluster_markers.rds"
-  umap_plot: "{output_dir}/pbmc3k_umap.jpg"
-
-#thresholds:
-  #avg_log2FC: 0.5
-  #clustering_resolution: 0.8
-
+  initial: "results/pbmc_initial.rds"
+  preprocessed: "results/pbmc_preprocessed.rds"
+  normalized: "results/pbmc_normalized.rds"
+  pca: "results/pbmc_pca.rds"
+  umap: "results/pbmc_umap.rds"
+  cluster_markers: "results/cluster_markers.rds"
+  umap_plot: "results/pbmc3k_umap.jpg"
