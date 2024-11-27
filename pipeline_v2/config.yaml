@@ -34,8 +34,7 @@ outputs:
   marker_violin_raw: "results/plots/marker_violin_raw.png"
   marker_feature: "results/plots/marker_feature.png"
   marker_heatmap: "results/plots/marker_heatmap.png"
-
- 
+  umap_dimplot_id: "results/plots/umap_dimplot_id.png"
 
 
 
