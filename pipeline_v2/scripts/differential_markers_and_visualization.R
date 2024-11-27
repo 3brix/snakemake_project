@@ -24,7 +24,7 @@ ggsave("results/plots/marker_violin_raw.png", marker_violin_raw, height = 6, wid
 
 # Feature plot
 marker_feature <- FeaturePlot(pbmc, features = c("MS4A1", "GNLY", "CD3E", "CD14", "FCER1A", "FCGR3A", "LYZ", "PPBP", "CD8A"))
-ggsave("results/marker_feature.png", marker_feature, height = 8, width = 10, dpi = 300)
+ggsave("results/plots/marker_feature.png", marker_feature, height = 8, width = 10, dpi = 300)
 
 # Heatmap of top 10 markers for each cluster
 pbmc.markers %>%
