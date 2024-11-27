@@ -70,7 +70,7 @@ rule differential_markers_and_visualization:
         config["outputs"]["umap"]
     output:
         markers=config["outputs"]["cluster_markers"],
-        plot=config["outputs"]["umap_plot"]
+        plot=config["outputs"]["umap_plot_id"]
     params:
         script=config["scripts"]["markers"]
     shell:
