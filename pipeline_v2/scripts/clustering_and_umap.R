@@ -15,6 +15,6 @@ pbmc <- RunUMAP(pbmc, dims = 1:10)
 saveRDS(pbmc, file = output_file)
 
 umap_dimplot <- DimPlot(pbmc, reduction = "umap")
-ggsave(filename = "results/umap_dimplot.png", plot = umap_dimplot, height = 6, width = 6, dpi = 300)
+ggsave(filename = "results/plots/umap_dimplot.png", plot = umap_dimplot, height = 6, width = 6, dpi = 300)
 
 
